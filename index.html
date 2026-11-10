@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1425">
+  <meta name="description" content="Interactive 12 V DC series-circuit laboratory with resistance controls, live voltage budget, animated conventional current and self-check questions.">
+  <title>CircuitLab | The 12 V Series Circuit</title>
+  <style>
+    :root{color-scheme:dark;--bg:#091322;--bg2:#102038;--panel:#122138;--panel-hi:#172942;--line:#2b4160;--text:#f1f6ff;--muted:#afc0d7;--soft:#8399b4;--cyan:#46d9e8;--cyan-deep:#0c899e;--orange:#ffbc70;--purple:#ad99ff;--green:#83e2b1;--red:#ff9d9d;--grid:#2c4563;--wire:#a9c2df;--shadow:0 20px 60px #030b165b;--button:#20344e;--focus:#ffffff;--highlight:#192f4b;--bar-bg:#20334c;--contrast:#ffffff}
+    html[data-theme="light"]{color-scheme:light;--bg:#f3f7fd;--bg2:#eaf1fc;--panel:#ffffff;--panel-hi:#f5f9ff;--line:#d4e0ef;--text:#132740;--muted:#49617c;--soft:#657d98;--cyan:#007d96;--cyan-deep:#087c94;--orange:#ae5411;--purple:#6552c5;--green:#136c4b;--red:#b13737;--grid:#dce7f3;--wire:#526c8b;--shadow:0 16px 38px #244a7817;--button:#ebf2fb;--focus:#123d6a;--highlight:#eaf4fe;--bar-bg:#e3eaf4;--contrast:#ffffff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:310px;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse 900px 500px at 85% -120px,color-mix(in srgb,var(--cyan) 13%,transparent),transparent 75%),linear-gradient(150deg,var(--bg),var(--bg2));line-height:1.5;transition:background .25s,color .25s}
+    button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,[role="button"]:focus-visible{outline:3px solid var(--focus);outline-offset:3px}button:disabled{opacity:.5;cursor:not-allowed}input{accent-color:var(--cyan-deep)}
+    .shell{max-width:1320px;margin:auto;padding:26px clamp(14px,2.7vw,34px) 52px}header{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:24px} .eyebrow{font-size:.72rem;font-weight:750;letter-spacing:.19em;text-transform:uppercase;color:var(--cyan)}h1{font-size:clamp(1.75rem,3.2vw,3rem);margin:.18em 0 .1em;letter-spacing:-.045em;line-height:1.12}h2{font-size:1.1rem;margin:0 0 4px;letter-spacing:-.025em}h3{font-size:.99rem;margin:0 0 6px}p{margin:.35rem 0;color:var(--muted)}.lead{max-width:700px;font-size:.97rem}.theme-toggle,.btn{border:1px solid var(--line);background:var(--button);color:var(--text);border-radius:12px;padding:10px 14px;display:inline-flex;align-items:center;gap:8px;justify-content:center;font-weight:720;transition:transform .14s,background .2s,border-color .2s}.theme-toggle{flex:0 0 auto;white-space:nowrap}.theme-toggle:hover,.btn:hover{background:var(--highlight);transform:translateY(-1px)}.btn.primary{background:var(--cyan-deep);border-color:var(--cyan-deep);color:white}.btn.primary:hover{filter:brightness(1.09)}.btn.ghost{background:transparent}.btn.small{padding:7px 10px;font-size:.81rem;border-radius:9px}
+    .main-grid{display:grid;grid-template-columns:minmax(0,1.53fr) minmax(310px,1fr);gap:18px;align-items:start}.stack{display:grid;gap:18px;min-width:0}.panel{border:1px solid var(--line);background:var(--panel);border-radius:20px;padding:clamp(16px,2vw,24px);box-shadow:var(--shadow);min-width:0}.panel-head{display:flex;align-items:start;justify-content:space-between;gap:12px}.mini{font-size:.78rem;color:var(--muted)}.tag{font-size:.72rem;letter-spacing:.035em;font-weight:800;border:1px solid var(--line);padding:5px 10px;border-radius:999px;color:var(--muted);white-space:nowrap}.diagram-frame{margin-top:16px;background:linear-gradient(145deg,var(--panel-hi),var(--panel));border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative}.diagram-frame svg{display:block;width:100%;height:auto;min-height:218px;touch-action:manipulation}.schematic .wire{fill:none;stroke:var(--wire);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.schematic .terminal{fill:var(--wire)}.schematic .resistor{fill:var(--panel);stroke-width:3.2;rx:10}.schematic .resistor.one{stroke:var(--cyan)}.schematic .resistor.two{stroke:var(--orange)}.schematic .component-label{font-size:20px;font-weight:800;fill:var(--text);text-anchor:middle}.schematic .sublabel{font-size:16px;font-weight:700;fill:var(--muted);text-anchor:middle}.schematic .hint{font-size:15px;fill:var(--soft);text-anchor:middle}.schematic .battery-plate{stroke:var(--purple);stroke-width:5;stroke-linecap:round}.schematic .voltage-symbol{font-size:24px;font-weight:800;fill:var(--purple)}.schematic .flow-dot{fill:var(--cyan);stroke:var(--panel);stroke-width:2}.schematic .arrow{fill:none;stroke:var(--cyan);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.schematic .hotspot{fill:transparent;cursor:pointer}.schematic .inspectable:focus .focus-ring,.schematic .inspectable.active .focus-ring,.schematic .inspectable:hover .focus-ring{opacity:1}.schematic .focus-ring{opacity:0;fill:none;stroke:var(--cyan);stroke-width:2.5;stroke-dasharray:6 6;pointer-events:none}.schematic .battery .focus-ring{stroke:var(--purple)}.schematic .r2 .focus-ring{stroke:var(--orange)}.caption-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:11px;flex-wrap:wrap}.chip.arrow-note{font-size:.8rem;color:var(--muted);white-space:normal;min-width:0}.chip{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}.dot{width:9px;height:9px;display:inline-block;border-radius:50%;background:var(--cyan)}.inspector{margin-top:14px;display:flex;align-items:start;gap:12px;border:1px solid var(--line);background:var(--highlight);border-radius:12px;padding:12px 13px;min-height:72px}.inspector-icon{font-size:1.5rem}.inspector strong{display:block}.inspector p{font-size:.86rem;margin:3px 0 0}.inspector small{font-size:.72rem;color:var(--soft)}
+    .control{margin-top:17px}.control:first-of-type{margin-top:10px}.control label{display:block;font-weight:770;font-size:.92rem}.control-grid{display:grid;grid-template-columns:minmax(0,1fr) 126px;gap:14px;align-items:center;margin-top:8px}.control input[type=range]{width:100%;height:28px;cursor:pointer}.numeric-wrap{display:flex;align-items:center;gap:7px;padding:5px 9px;border:1px solid var(--line);border-radius:10px;background:var(--panel-hi)}.numeric-wrap input{width:100%;min-width:0;border:0;background:transparent;color:var(--text);padding:6px 0;text-align:right;font-weight:750;font-variant-numeric:tabular-nums;outline:none}.numeric-wrap:focus-within{outline:2px solid var(--focus);outline-offset:2px}.numeric-wrap input:focus-visible{outline:0}.numeric-wrap span{color:var(--muted);font-size:.8rem}.numeric-wrap.invalid{border:2px solid var(--red);background:color-mix(in srgb,var(--red) 8%,var(--panel))}.help{font-size:.78rem;color:var(--soft);margin:8px 0}.error{color:var(--red);min-height:1.5em;font-size:.85rem;font-weight:750}.presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}.metric{border:1px solid var(--line);border-radius:13px;background:var(--panel-hi);padding:14px 13px;min-width:0}.metric .name{font-size:.76rem;color:var(--muted)}.metric .value{display:block;font-size:clamp(1.27rem,2vw,1.8rem);font-weight:850;line-height:1.28;white-space:nowrap;letter-spacing:-.03em;font-variant-numeric:tabular-nums}.metric .unit{font-size:.7em;font-weight:670;letter-spacing:0}.metric.c1 .value{color:var(--cyan)}.metric.c2 .value{color:var(--orange)}.metric .sub{font-size:.74rem;color:var(--soft)}.math-lines{display:grid;gap:9px;margin-top:16px}.math-line{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel-hi);font-size:.82rem;overflow-wrap:anywhere}.math-line .law{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--soft)}.math-line .eq{display:block;font-variant-numeric:tabular-nums;margin-top:3px;color:var(--text)}
+    .budget{margin-top:18px}.budget-header{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.budget-bar{display:flex;height:42px;border-radius:11px;overflow:hidden;margin:12px 0 11px;background:var(--bar-bg);border:1px solid var(--line)}.segment{display:flex;align-items:center;justify-content:center;transition:flex-basis .24s ease;width:0;min-width:0;overflow:hidden}.segment.s1{background:#067f9d;color:#fff}.segment.s2{background:#c77430;color:#fff}.bar-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.83rem}.swatch{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}.s1sw{background:#067f9d}.s2sw{background:#c77430}.budget-total{font-size:.96rem;font-weight:750;margin-top:12px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.budget-total b{color:var(--green)}
+    .lesson{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}.lesson>div{border-top:2px solid var(--line);padding-top:9px}.lesson strong{font-size:.8rem}.lesson p{font-size:.77rem;margin:4px 0}.quizzes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}.quiz{border:1px solid var(--line);background:var(--panel-hi);border-radius:14px;padding:16px;min-width:0}.quiz-title{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--soft);font-weight:850;font-size:.71rem;letter-spacing:.1em;text-transform:uppercase}.quiz p{font-size:.9rem;font-weight:650;min-height:2.9em;margin:11px 0 12px;color:var(--text)}.quiz-answer{display:flex;align-items:center;gap:8px;margin:0 0 12px}.quiz-answer input{width:100%;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px 9px;font-variant-numeric:tabular-nums}.quiz-answer span{color:var(--muted)}.quiz select{width:100%;max-width:100%;padding:10px 8px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:9px;margin:0 0 12px}.feedback{font-size:.82rem;min-height:1.5em;margin-top:10px;color:var(--muted);white-space:pre-line}.feedback.ok{color:var(--green)}.feedback.bad{color:var(--red)}.quiz-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}.section-intro{max-width:720px}.footer{padding:24px 2px 0;font-size:.8rem;color:var(--soft)}.a11y-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.smallmath{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em}.status-bubble{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:.76rem;color:var(--muted)}.status-bubble b{color:var(--green)}
+    @media(max-width:980px){.main-grid{grid-template-columns:1fr}.quizzes{grid-template-columns:repeat(2,minmax(0,1fr))}.quiz:last-child{grid-column:1/-1}.metric .value{font-size:1.55rem}}@media(max-width:630px){.shell{padding:17px 12px 32px}header{align-items:start}h1{font-size:1.68rem}.theme-toggle{padding:9px 10px;font-size:.81rem}.panel{border-radius:16px;padding:14px}.quizzes{grid-template-columns:1fr}.quiz:last-child{grid-column:auto}.quiz p{min-height:0}.lesson{grid-template-columns:1fr}.lesson>div{padding:8px 0}.control-grid{grid-template-columns:minmax(0,1fr) 105px;gap:9px}.metric .value{font-size:1.3rem}.diagram-frame{overflow-x:auto;overscroll-behavior-x:contain}.diagram-frame svg{min-width:530px;min-height:250px}.panel-head{align-items:start}.tag{white-space:normal}.budget-bar{height:33px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}body{transition:none}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div><div class="eyebrow">Electrical engineering · Interactive lab 02</div><h1>The 12 V Series Circuit</h1><p class="lead">Change either resistor. Watch the current, voltage drops, and the 12 V budget respond—then test your predictions.</p></div>
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false"><span id="themeIcon" aria-hidden="true">☀</span><span id="themeText">Light mode</span></button>
+  </header>
+  <div class="main-grid">
+    <div class="stack">
+      <section class="panel" aria-labelledby="schematicTitle">
+        <div class="panel-head"><div><h2 id="schematicTitle">Live circuit schematic</h2><p class="mini">Click or focus the battery, either resistor, or the wire to inspect it.</p></div><span class="tag">12 V DC · Series</span></div>
+        <div class="diagram-frame">
+          <svg id="schematic" class="schematic" viewBox="0 0 760 375" role="group" aria-label="12 volt battery at left, resistor R1 on top and resistor R2 at right in a single series loop. Animated dots indicate conventional current moving clockwise.">
+            <title>Two-resistor series circuit</title><desc>A positive battery terminal feeds a top horizontal resistor R1, then a vertical resistor R2, then returns through the bottom wire to the negative battery terminal. Current flows clockwise.</desc>
+            <g id="wireGroup" class="inspectable" role="button" tabindex="0" aria-label="Inspect connecting wires and current direction" data-inspect="wire">
+              <path class="wire" d="M120 176 V110 H307 M453 110 H635 V166 M635 249 V315 H120 V202"/>
+              <path class="hotspot" d="M120 176 V110 H307 M453 110 H635 V166 M635 249 V315 H120 V202" stroke="transparent" stroke-width="28" fill="none"/>
+            </g>
+            <g id="r1Component" class="inspectable r1" role="button" tabindex="0" aria-label="Inspect resistor R1" data-inspect="r1">
+              <rect class="focus-ring" x="298" y="83" width="164" height="54" rx="12"/>
+              <rect class="resistor one" x="307" y="93" width="146" height="34" rx="10"/>
+              <text id="r1Diagram" x="380" y="88" class="component-label" fill="var(--text)">R₁ 100 Ω</text>
+              <rect class="hotspot" x="297" y="68" width="165" height="75" rx="12"/>
+            </g>
+            <g id="r2Component" class="inspectable r2" role="button" tabindex="0" aria-label="Inspect resistor R2" data-inspect="r2">
+              <rect class="focus-ring" x="599" y="155" width="72" height="106" rx="11"/>
+              <rect class="resistor two" x="618" y="166" width="34" height="83" rx="9"/>
+              <text id="r2Diagram" x="554" y="209" class="component-label">R₂ 200 Ω</text>
+              <rect class="hotspot" x="594" y="147" width="80" height="113" rx="12"/>
+            </g>
+            <g id="batteryComponent" class="inspectable battery" role="button" tabindex="0" aria-label="Inspect 12 volt battery" data-inspect="battery">
+              <rect class="focus-ring" x="80" y="145" width="88" height="73" rx="10"/>
+              <line class="battery-plate" x1="85" y1="176" x2="155" y2="176"/><line class="battery-plate" x1="105" y1="202" x2="135" y2="202"/>
+              <text x="65" y="182" class="voltage-symbol">+</text><text x="65" y="213" class="voltage-symbol">−</text>
+              <text x="199" y="183" class="component-label">12 V</text><text x="199" y="203" class="sublabel">DC source</text>
+              <rect class="hotspot" x="70" y="139" width="175" height="84" rx="10"/>
+            </g>
+            <g aria-hidden="true"><path class="arrow" d="M230 110 h36 m-10 -8 10 8 -10 8"/><path class="arrow" d="M635 270 v25 m-8 -10 8 10 8 -10"/><path class="arrow" d="M478 315 h-36 m10 -8 -10 8 10 8"/></g>
+            <g id="currentDots" aria-hidden="true"></g>
+            <text x="377" y="183" id="centerCurrent" class="component-label" style="font-size:28px">I = 40.00 mA</text>
+            <text x="377" y="210" class="hint">One path for current</text>
+            <text x="377" y="266" id="centerKvl" class="sublabel">4.00 V + 8.00 V = 12.00 V</text>
+            <text x="377" y="342" class="hint">Conventional current: from + to − through the external loop</text>
+          </svg>
+        </div>
+        <div class="caption-strip"><div class="chip arrow-note"><span class="dot" aria-hidden="true"></span> Animated dots illustrate direction—not actual electron speed. On phones, swipe the diagram sideways.</div><button class="btn small" id="flowToggle" type="button" aria-pressed="false">⏸ Pause flow</button></div>
+        <div id="inspector" class="inspector" aria-live="polite"><span id="inspectIcon" class="inspector-icon" aria-hidden="true">🔎</span><div><strong id="inspectTitle">Inspect a component</strong><p id="inspectBody">Hover, tap, or keyboard-focus a circuit part. Click or press Enter to keep its description selected.</p><small id="inspectHint">You can also work entirely with the resistance controls.</small></div></div>
+      </section>
+      <section class="panel" aria-labelledby="budgetTitle">
+        <div class="panel-head"><div><h2 id="budgetTitle">Where do the 12 volts go?</h2><p class="mini">Kirchhoff’s voltage law: the two voltage drops add to the battery voltage.</p></div><span class="tag">V₁ + V₂ = 12 V</span></div>
+        <div class="budget">
+          <div class="budget-header"><strong>Voltage budget</strong><span class="status-bubble">Remaining: <b id="unallocated">0.00 V</b></span></div>
+          <div class="budget-bar" role="img" id="budgetBar" aria-label="Resistor R1 receives 4 volts, resistor R2 receives 8 volts; total 12 volts"><div class="segment s1" id="v1Bar" style="flex:0 0 33.333333%"></div><div class="segment s2" id="v2Bar" style="flex:0 0 66.666667%"></div></div>
+          <div class="bar-legend"><span><i class="swatch s1sw"></i>R₁ drop: <strong id="v1Legend">4.00 V</strong></span><span><i class="swatch s2sw"></i>R₂ drop: <strong id="v2Legend">8.00 V</strong></span></div>
+          <div class="budget-total" id="budgetEquation">4.00 V + 8.00 V = <b>12.00 V</b></div>
+          <p class="help">All calculations use full precision; the displayed drops use complementary rounding to 0.01 V so the visible budget always adds to exactly 12.00 V.</p>
+        </div>
+        <div class="lesson"><div><strong>1 · Series rule</strong><p>Resistance adds: R<sub>total</sub> = R₁ + R₂.</p></div><div><strong>2 · Ohm’s law</strong><p>The same current flows through both: I = 12 V / R<sub>total</sub>.</p></div><div><strong>3 · Voltage drops</strong><p>V₁ = I × R₁ and V₂ = I × R₂; their sum is 12 V.</p></div></div>
+      </section>
+    </div>
+    <div class="stack">
+      <section class="panel" aria-labelledby="controlsTitle">
+        <div class="panel-head"><div><h2 id="controlsTitle">Change the resistors</h2><p class="mini">Use sliders or enter a positive resistance directly.</p></div><button type="button" class="btn small ghost" id="resetAll">↺ Reset</button></div>
+        <div class="control"><label for="r1Slider">R₁ · First resistor</label><div class="control-grid"><input id="r1Slider" type="range" min="1" max="1000" step="1" value="100" aria-label="R1 resistance slider in ohms"><div class="numeric-wrap" id="r1Wrap"><input id="r1Number" type="number" step="any" min="0.01" max="10000" value="100" aria-label="R1 resistance in ohms"><span>Ω</span></div></div></div>
+        <div class="control"><label for="r2Slider">R₂ · Second resistor</label><div class="control-grid"><input id="r2Slider" type="range" min="1" max="1000" step="1" value="200" aria-label="R2 resistance slider in ohms"><div class="numeric-wrap" id="r2Wrap"><input id="r2Number" type="number" step="any" min="0.01" max="10000" value="200" aria-label="R2 resistance in ohms"><span>Ω</span></div></div></div>
+        <p class="help">Sliders: 1–1,000 Ω. Number boxes: any finite positive value up to 10,000 Ω. A zero, blank, negative, or invalid input will not be applied.</p>
+        <div class="error" role="alert" id="inputError"></div>
+        <div class="presets" aria-label="Quick experiment presets"><button type="button" class="btn small" data-preset="100,200">100 Ω / 200 Ω</button><button type="button" class="btn small" data-preset="150,150">Equal resistors</button><button type="button" class="btn small" data-preset="50,500">50 Ω / 500 Ω</button></div>
+      </section>
+      <section class="panel" aria-labelledby="readingsTitle"><div class="panel-head"><div><h2 id="readingsTitle">Live meter readings</h2><p class="mini">Ideal battery and resistors, steady-state direct current.</p></div><span class="tag">Ohm’s law</span></div>
+        <div class="metric-grid"><div class="metric"><span class="name">Total resistance</span><strong id="totalR" class="value">300 <span class="unit">Ω</span></strong><span class="sub">R₁ + R₂</span></div><div class="metric"><span class="name">Loop current</span><strong id="totalI" class="value">40.00 <span class="unit">mA</span></strong><span class="sub">The same everywhere in series</span></div><div class="metric c1"><span class="name">Drop across R₁</span><strong id="drop1" class="value">4.00 <span class="unit">V</span></strong><span class="sub">I × R₁</span></div><div class="metric c2"><span class="name">Drop across R₂</span><strong id="drop2" class="value">8.00 <span class="unit">V</span></strong><span class="sub">I × R₂</span></div></div>
+        <div class="math-lines"><div class="math-line"><span class="law">Series resistance</span><span class="eq" id="resistanceMath">Rₜ = 100 Ω + 200 Ω = 300 Ω</span></div><div class="math-line"><span class="law">Ohm's law</span><span class="eq" id="currentMath">I = 12 V / 300 Ω = 0.040000 A (40.00 mA)</span></div><div class="math-line"><span class="law">Voltage divider</span><span class="eq" id="dividerMath">V₁ = 12 × 100 / 300 = 4.00 V; V₂ = 12 × 200 / 300 = 8.00 V</span></div></div>
+      </section>
+    </div>
+  </div>
+  <section class="panel" style="margin-top:18px" aria-labelledby="quizTitle"><div class="panel-head"><div><h2 id="quizTitle">Check your understanding</h2><p class="section-intro mini">Answers use the resistances currently shown. Enter a value, select an answer, and choose Check for an immediate explanation. Changing R₁ or R₂ resets the checks.</p></div><span class="status-bubble" id="score" aria-live="polite">0 / 3 correct</span></div>
+    <div class="quizzes">
+      <div class="quiz"><div class="quiz-title"><span>Question 01</span><span>Calculate</span></div><p>What is the current through R₂, in milliamperes?</p><label class="a11y-only" for="answer1">Current in milliamperes</label><div class="quiz-answer"><input id="answer1" type="number" step="any" inputmode="decimal" placeholder="Your answer"><span>mA</span></div><button type="button" class="btn primary small" id="check1">Check current</button><div id="feedback1" class="feedback" role="status" aria-live="polite"></div></div>
+      <div class="quiz"><div class="quiz-title"><span>Question 02</span><span>Calculate</span></div><p>How many volts are dropped across R₁?</p><label class="a11y-only" for="answer2">Voltage drop across R1 in volts</label><div class="quiz-answer"><input id="answer2" type="number" step="any" inputmode="decimal" placeholder="Your answer"><span>V</span></div><button type="button" class="btn primary small" id="check2">Check voltage</button><div id="feedback2" class="feedback" role="status" aria-live="polite"></div></div>
+      <div class="quiz"><div class="quiz-title"><span>Question 03</span><span>Predict</span></div><p>If R₁ doubles and R₂ stays fixed, what happens to the loop current?</p><label class="a11y-only" for="answer3">Current change prediction</label><select id="answer3"><option value="">Choose a prediction</option><option value="increase">It increases</option><option value="decrease">It decreases</option><option value="same">It stays the same</option></select><button type="button" class="btn primary small" id="check3">Check prediction</button><div id="feedback3" class="feedback" role="status" aria-live="polite"></div></div>
+    </div>
+    <div class="quiz-footer"><p class="mini">Numerical answers accepted within ±0.05 mA (Q1) or ±0.05 V (Q2). Units are shown beside answer fields.</p><button type="button" class="btn small" id="resetQuiz">↺ Try all questions again</button></div>
+  </section>
+  <footer class="footer"><strong>Physical assumptions:</strong> One closed loop, ideal 12 V DC source, ideal ohmic resistors, negligible wire resistance, and no internal battery resistance. The animation shows <em>conventional current</em> from positive to negative through the external circuit; real electron drift is in the opposite direction. Actual components have tolerances and may heat up; this is an ideal instructional model.</footer>
+</div>
+<script>
+(()=>{'use strict';
+  const V=12;
+  const $=id=>document.getElementById(id);
+  const state={r1:100,r2:200,selected:null,flow:true};
+  const fmt=(n,d=2)=>Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+  const compact=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
+  const result=(r1,r2)=>{const rt=r1+r2;const i=V/rt;return {rt,i,ma:i*1000,v1:i*r1,v2:i*r2};};
+  const displayDrops=(calc)=>{const first=Math.round((calc.v1+Number.EPSILON)*100)/100;return [first,V-first]};
+  const valid=n=>Number.isFinite(n)&&n>0&&n<=10000;
+  // Educational invariants are available for a teacher to verify in the browser console.
+  window.seriesCircuitMath={calculate:result,displayDrops,supply:V};
+  const inspector={
+    battery:()=>({icon:'🔋',name:'12 V DC source',desc:'The ideal battery supplies a fixed 12 V. It pushes the same loop current through both resistors.',hint:'In this model, Vsource = V₁ + V₂ = 12 V.'}),
+    r1:()=>{let c=result(state.r1,state.r2);return {icon:'🟦',name:'R₁ · '+compact(state.r1)+' Ω',desc:'The first resistor carries '+fmt(c.ma)+' mA and drops '+fmt(c.v1)+' V (unrounded).',hint:'V₁ = I × R₁ = 12 × R₁ / (R₁ + R₂).'}},
+    r2:()=>{let c=result(state.r1,state.r2);return {icon:'🟧',name:'R₂ · '+compact(state.r2)+' Ω',desc:'The second resistor carries '+fmt(c.ma)+' mA and drops '+fmt(c.v2)+' V (unrounded).',hint:'V₂ = I × R₂ = 12 × R₂ / (R₁ + R₂).'}},
+    wire:()=>{let c=result(state.r1,state.r2);return {icon:'➰',name:'Single series loop',desc:'Every point in the ideal loop carries '+fmt(c.ma)+' mA. Conventional current goes from the positive terminal through R₁, then R₂, back to negative.',hint:'The moving dots are a direction cue, not a physical speed simulation.'}}
+  };
+  let hovered=null;
+  const renderInspector=()=>{let key=hovered||state.selected;if(!key){$('inspectIcon').textContent='🔎';$('inspectTitle').textContent='Inspect a component';$('inspectBody').textContent='Hover, tap, or keyboard-focus a circuit part. Click or press Enter to keep its description selected.';$('inspectHint').textContent='You can also work entirely with the resistance controls.';}else{const data=inspector[key]();$('inspectIcon').textContent=data.icon;$('inspectTitle').textContent=data.name;$('inspectBody').textContent=data.desc;$('inspectHint').textContent=data.hint;}document.querySelectorAll('.inspectable').forEach(el=>el.classList.toggle('active',el.dataset.inspect===state.selected));};
+  document.querySelectorAll('.inspectable').forEach(el=>{
+    const key=el.dataset.inspect;
+    el.addEventListener('mouseenter',()=>{hovered=key;renderInspector()});
+    el.addEventListener('mouseleave',()=>{hovered=null;renderInspector()});
+    el.addEventListener('focus',()=>{hovered=key;renderInspector()});
+    el.addEventListener('blur',()=>{hovered=null;renderInspector()});
+    const toggleSelection=()=>{state.selected=state.selected===key?null:key;renderInspector()};
+    el.addEventListener('click',toggleSelection);
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSelection();}});
+  });
+  const quizState=[false,false,false];
+  function resetQuiz(){quizState.fill(false);for(let n=1;n<=3;n++){$('answer'+n).value='';const f=$('feedback'+n);f.textContent='';f.className='feedback';}updateScore();}
+  function updateScore(){$('score').textContent=quizState.filter(Boolean).length+' / 3 correct';}
+  function setFeedback(n,ok,message){quizState[n-1]=ok;const el=$('feedback'+n);el.textContent=(ok?'✓ Correct. ':'✕ Try again. ')+message;el.className='feedback '+(ok?'ok':'bad');updateScore();}
+  function check(n){const c=result(state.r1,state.r2);
+    if(n===1||n===2){const raw=$('answer'+n).value.trim(),ans=Number(raw);if(raw===''||!Number.isFinite(ans)){quizState[n-1]=false;const f=$('feedback'+n);f.textContent='Enter a valid number first.';f.className='feedback bad';updateScore();return;}
+      if(n===1){const ok=Math.abs(ans-c.ma)<=.05+1e-10;setFeedback(1,ok,'I = 12 V / ('+compact(state.r1)+' + '+compact(state.r2)+') Ω = '+fmt(c.ma,3)+' mA. The current through R₁ and R₂ is identical.');}
+      else{const ok=Math.abs(ans-c.v1)<=.05+1e-10;setFeedback(2,ok,'V₁ = 12 × '+compact(state.r1)+' / ('+compact(state.r1)+' + '+compact(state.r2)+') = '+fmt(c.v1,3)+' V.');}
+    }else{const choice=$('answer3').value;if(!choice){const f=$('feedback3');f.textContent='Choose a prediction first.';f.className='feedback bad';quizState[2]=false;updateScore();return;}
+      const newMa=V/(2*state.r1+state.r2)*1000;
+      setFeedback(3,choice==='decrease','Doubling R₁ increases total resistance from '+compact(c.rt)+' Ω to '+compact(2*state.r1+state.r2)+' Ω. Current falls from '+fmt(c.ma,3)+' mA to '+fmt(newMa,3)+' mA because I = V/Rₜ.');}
+  }
+  for(let n=1;n<=3;n++){$('check'+n).addEventListener('click',()=>check(n));}
+  $('resetQuiz').addEventListener('click',resetQuiz);
+  $('answer1').addEventListener('keydown',e=>{if(e.key==='Enter')check(1)});
+  $('answer2').addEventListener('keydown',e=>{if(e.key==='Enter')check(2)});
+  $('answer3').addEventListener('keydown',e=>{if(e.key==='Enter')check(3)});
+  for(let n=1;n<=3;n++){$('answer'+n).addEventListener('input',()=>{if($('feedback'+n).textContent){$('feedback'+n).textContent='';$('feedback'+n).className='feedback';quizState[n-1]=false;updateScore()}})}
+  function resetInvalid(){for(const k of ['r1','r2']){$(k+'Number').removeAttribute('aria-invalid');$(k+'Wrap').classList.remove('invalid')}$('inputError').textContent='';}
+  function draw(){const c=result(state.r1,state.r2),[d1,d2]=displayDrops(c);
+    $('r1Diagram').textContent='R₁ '+compact(state.r1)+' Ω';$('r2Diagram').textContent='R₂ '+compact(state.r2)+' Ω';
+    $('centerCurrent').textContent='I = '+fmt(c.ma)+' mA';$('centerKvl').textContent=fmt(d1)+' V + '+fmt(d2)+' V = 12.00 V';
+    $('totalR').innerHTML=compact(c.rt)+' <span class="unit">Ω</span>';
+    $('totalI').innerHTML=fmt(c.ma)+' <span class="unit">mA</span>';
+    $('drop1').innerHTML=fmt(d1)+' <span class="unit">V</span>';
+    $('drop2').innerHTML=fmt(d2)+' <span class="unit">V</span>';
+    $('resistanceMath').textContent='Rₜ = '+compact(state.r1)+' Ω + '+compact(state.r2)+' Ω = '+compact(c.rt)+' Ω';
+    $('currentMath').textContent='I = 12 V / '+compact(c.rt)+' Ω = '+fmt(c.i,6)+' A ('+fmt(c.ma,3)+' mA)';
+    $('dividerMath').textContent='V₁ = 12 × '+compact(state.r1)+' / '+compact(c.rt)+' ≈ '+fmt(d1)+' V; V₂ = 12 × '+compact(state.r2)+' / '+compact(c.rt)+' ≈ '+fmt(d2)+' V';
+    $('v1Legend').textContent=fmt(d1)+' V';$('v2Legend').textContent=fmt(d2)+' V';
+    $('budgetEquation').innerHTML=fmt(d1)+' V + '+fmt(d2)+' V = <b>12.00 V</b>';
+    $('unallocated').textContent='0.00 V';
+    $('v1Bar').style.flex='0 0 '+(c.v1/V*100).toFixed(9)+'%';
+    $('v2Bar').style.flex='0 0 '+(c.v2/V*100).toFixed(9)+'%';
+    $('budgetBar').setAttribute('aria-label','R1 '+fmt(d1)+' volts ('+fmt(c.v1/V*100,1)+' percent), R2 '+fmt(d2)+' volts ('+fmt(c.v2/V*100,1)+' percent); total exactly 12 volts');
+    renderInspector();
+  }
+  function syncInput(k){$(k+'Slider').value=String(Math.max(1,Math.min(1000,state[k])));$(k+'Number').value=String(state[k]);}
+  function setResistances(r1,r2,{quiz=true}={}){if(!valid(r1)||!valid(r2))return false;const changed=state.r1!==r1||state.r2!==r2;state.r1=r1;state.r2=r2;resetInvalid();syncInput('r1');syncInput('r2');draw();if(changed&&quiz)resetQuiz();return true;}
+  for(const k of ['r1','r2']){
+    $(k+'Slider').addEventListener('input',e=>{setResistances(k==='r1'?Number(e.target.value):state.r1,k==='r2'?Number(e.target.value):state.r2)});
+    $(k+'Number').addEventListener('input',e=>{const raw=e.target.value.trim(),val=Number(raw);if(raw===''||!valid(val)){$(k+'Number').setAttribute('aria-invalid','true');$(k+'Wrap').classList.add('invalid');$('inputError').textContent=(k==='r1'?'R₁':'R₂')+' must be greater than 0 Ω and no more than 10,000 Ω. Previous valid values remain active.';return;}setResistances(k==='r1'?val:state.r1,k==='r2'?val:state.r2)});
+    $(k+'Number').addEventListener('keydown',e=>{if(e.key==='Escape'){syncInput(k);resetInvalid();e.preventDefault()}});
+  }
+  document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{const [r1,r2]=b.dataset.preset.split(',').map(Number);setResistances(r1,r2)}));
+  $('resetAll').addEventListener('click',()=>{setResistances(100,200);resetQuiz();state.selected=null;hovered=null;renderInspector();state.flow=true;$('flowToggle').textContent='⏸ Pause flow';$('flowToggle').setAttribute('aria-pressed','false');});
+  // Current-flow indicator follows the external circuit from the positive terminal,
+  // clockwise through both ideal resistors, to the negative terminal.
+  const pts=[[120,176],[120,110],[635,110],[635,315],[120,315],[120,202]];
+  const lengths=[];let totalLength=0;for(let j=1;j<pts.length;j++){const a=pts[j-1],b=pts[j];const d=Math.hypot(b[0]-a[0],b[1]-a[1]);lengths.push(d);totalLength+=d;}
+  const NS='http://www.w3.org/2000/svg',circles=[];
+  for(let k=0;k<11;k++){const dot=document.createElementNS(NS,'circle');dot.setAttribute('r','7');dot.setAttribute('class','flow-dot');$('currentDots').appendChild(dot);circles.push(dot)}
+  function pointOnLoop(f){let len=((f%1)+1)%1*totalLength;for(let j=0;j<lengths.length;j++){if(len<=lengths[j]||j===lengths.length-1){const t=Math.min(1,len/lengths[j]),a=pts[j],b=pts[j+1];return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t]}len-=lengths[j]}return pts[0]}
+  let phase=0,lastTime=null;
+  const reducedMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reducedMotion)state.flow=false;
+  function animate(now){const dt=lastTime===null?0:Math.min((now-lastTime)/1000,.1);lastTime=now;
+    if(state.flow){const speed=Math.min(.55,.12+.13*Math.sqrt(result(state.r1,state.r2).ma/40));phase=(phase+dt*speed)%1;}
+    circles.forEach((dot,k)=>{const p=pointOnLoop(phase+k/circles.length);dot.setAttribute('cx',p[0].toFixed(2));dot.setAttribute('cy',p[1].toFixed(2))});
+    window.requestAnimationFrame(animate);
+  }
+  $('flowToggle').addEventListener('click',()=>{state.flow=!state.flow;$('flowToggle').textContent=state.flow?'⏸ Pause flow':'▶ Resume flow';$('flowToggle').setAttribute('aria-pressed',String(!state.flow))});
+  if(reducedMotion){$('flowToggle').textContent='▶ Resume flow';$('flowToggle').setAttribute('aria-pressed','true')}
+  window.requestAnimationFrame(animate);
+  function theme(next){document.documentElement.setAttribute('data-theme',next);const isLight=next==='light';$('themeIcon').textContent=isLight?'☾':'☀';$('themeText').textContent=isLight?'Dark mode':'Light mode';$('themeToggle').setAttribute('aria-pressed',String(isLight));$('themeToggle').setAttribute('aria-label','Switch to '+(isLight?'dark':'light')+' mode');try{localStorage.setItem('series-circuit-theme',next)}catch(_){}}
+  let saved='dark';try{saved=localStorage.getItem('series-circuit-theme')||'dark'}catch(_){ }theme(saved==='light'?'light':'dark');
+  $('themeToggle').addEventListener('click',()=>theme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+  // Export a read-only summary for educational testing without exposing mutable state.
+  window.seriesCircuitInspect=()=>({r1:state.r1,r2:state.r2,...result(state.r1,state.r2),shown:displayDrops(result(state.r1,state.r2)),theme:document.documentElement.getAttribute('data-theme'),flow:state.flow,score:quizState.filter(Boolean).length});
+  draw();renderInspector();
+})();
+</script>
+</body>
+</html>
